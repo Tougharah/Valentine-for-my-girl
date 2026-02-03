@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #ffeef6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .puppies {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+      font-size: 90px;
+      transition: all 0.5s ease;
+    }
+
+    .note {
+      background: white;
+      padding: 15px 20px;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      position: absolute;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #ff4d88;
+      color: white;
+      left: 35%;
+      top: 40px;
+      z-index: 2;
+    }
+
+    #noBtn {
+      background: #ccc;
+      color: #333;
+      left: 55%;
+      top: 40px;
+      z-index: 1;
+    }
+
+    .celebrate {
+      display: none;
+      font-size: 28px;
+      color: #ff2f92;
+      margin-top: 20px;
+    }
+
+    .fireworks {
+      font-size: 40px;
+      animation: pop 1s infinite alternate;
+    }
+
+    @keyframes pop {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
+
+    .gift {
+      margin-top: 20px;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .photo {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .photo img {
+      max-width: 200px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="puppies" id="puppies">
+      <div>🐶</div>
+    </div>
+
+    <div class="note" id="note">
+      <strong>Miranda, will you be my Valentine? 💌</strong>
+    </div>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 😢</button>
+    </div>
+
+    <div class="celebrate" id="celebrate">
+      <div class="fireworks">🎆 🎇 🎆</div>
+      <div>I knew it, you said YES 💕</div>
+      <div class="gift" id="gift">🎁 👉 📷</div>
+      <div class="photo" id="photo">
+        <!-- Replace src with your photo -->
+        <img src="me.png" alt="My Photo" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const puppies = document.getElementById('puppies');
+    const note = document.getElementById('note');
+    const celebrate = document.getElementById('celebrate');
+    const gift = document.getElementById('gift');
+    const photo = document.getElementById('photo');
+
+    let noCount = 0;
+    let yesScale = 1;
+
+    noBtn.addEventListener('click', () => {
+      noCount++;
+
+      const maxX = 80;
+      const maxY = 80;
+      const randX = Math.random() * maxX;
+      const randY = Math.random() * maxY;
+
+      noBtn.style.left = randX + '%';
+      noBtn.style.top = randY + 'px';
+
+      yesScale += 0.2;
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      if (noCount === 3) {
+        puppies.innerHTML = `<div>🐶</div><div>🐶</div>`;
+        note.innerHTML = '<strong>Please don\'t say no… I beg 🥺</strong>';
+      }
+    });
+
+    yesBtn.addEventListener('click', () => {
+      document.querySelector('.buttons').style.display = 'none';
+      note.style.display = 'none';
+      celebrate.style.display = 'block';
+      puppies.style.fontSize = '100px';
+    });
+
+    gift.addEventListener('click', () => {
+      photo.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
